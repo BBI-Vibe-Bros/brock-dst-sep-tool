@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare SEP Finder | Bobby Brock Insurance (BBI)</title>
+    <meta name="description" content="Professional Medicare Special Enrollment Period finder for insurance agents. Find active FEMA disaster SEPs by county or state.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="bbi-favicon.png">
+    <link rel="shortcut icon" href="bbi-favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- BBI Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="bbi-logo">
+                    <img src="bbi-logo.png" alt="Bobby Brock Insurance" style="height: 60px; width: auto;">
+                </div>
+                <div class="bbi-tagline">Medicare SEP Finder</div>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(662) 844-3300</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@bobbybrockinsurance.com</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Page Title Section -->
+        <section class="page-title">
+            <h1><i class="fas fa-shield-alt"></i> Medicare SEP Finder</h1>
+            <p>Professional tool for insurance agents to find active FEMA disaster Special Enrollment Periods (SEPs). Search by county or filter by state to help your Medicare clients find available SEPs.</p>
+        </section>
+
+        <!-- Statistics Dashboard -->
+        <section class="stats-grid">
+            <div class="stat-card urgent">
+                <span class="stat-number" id="urgentCount">-</span>
+                <div class="stat-label">Urgent SEPs (≤30 days)</div>
+            </div>
+            <div class="stat-card ending-soon">
+                <span class="stat-number" id="activeCount">-</span>
+                <div class="stat-label">Active SEPs (>30 days)</div>
+            </div>
+            <div class="stat-card ongoing">
+                <span class="stat-number" id="ongoingCount">-</span>
+                <div class="stat-label">Ongoing SEPs</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="totalCounties">-</span>
+                <div class="stat-label">Affected Counties</div>
+            </div>
+        </section>
+
+        <!-- Search Controls -->
+        <section class="search-section">
+            <h2><i class="fas fa-search"></i> Search Medicare SEPs</h2>
+            
+            <div class="search-controls">
+                <div class="control-group">
+                    <label for="countySearch">
+                        <i class="fas fa-map-marked-alt"></i> County Search
+                    </label>
+                    <input 
+                        type="text" 
+                        id="countySearch" 
+                        placeholder="Enter county name (e.g., Lee County)"
+                        title="Enter a county name to search for available SEPs"
+                    >
+                </div>
+
+                <div class="control-group">
+                    <label for="stateFilter">
+                        <i class="fas fa-map"></i> Filter by State
+                    </label>
+                    <select id="stateFilter">
+                        <option value="">All States</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="sepStatusFilter">
+                        <i class="fas fa-clock"></i> SEP Status
+                    </label>
+                    <select id="sepStatusFilter">
+                        <option value="">All SEP Status</option>
+                        <option value="urgent">Urgent (≤30 days left)</option>
+                        <option value="active">Active (>30 days left)</option>
+                        <option value="ongoing">Ongoing (no end date)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="searchBtn" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search SEPs
+                </button>
+                <button id="clearBtn" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Clear Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="results-header">
+                <h2><i class="fas fa-list"></i> Medicare SEP Results</h2>
+                <div class="results-count" id="resultsCount">Loading...</div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading Medicare SEP data...</p>
+            </div>
+
+            <!-- Results Container -->
+            <div id="resultsContainer" class="results-container">
+                <!-- SEP cards will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-content">
+                <h4><i class="fas fa-info-circle"></i> Important Disclaimer</h4>
+                <p>We update this page daily with the most current information on FEMA Special Enrollment Periods (SEPs) related to Medicare. While we aim to provide timely and accurate updates, please note that not all emergency SEPs may be listed here or still active. Availability can vary by state and carrier, so we encourage you to verify directly with your state's Medicare office and your insurance carriers. For the latest list of eligible counties under FEMA disaster declarations, visit the official FEMA website.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Bobby Brock Insurance</strong> - Medicare SEP Finder</p>
+            <p>499 Air Park Road, Tupelo MS 38801 | (662) 844-3300</p>
+            <div id="lastUpdated" class="last-updated">
+                <i class="fas fa-clock"></i> Data loading...
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 

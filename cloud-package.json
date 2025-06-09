@@ -1,0 +1,17 @@
+{
+  "name": "fema-medicare-sep-sync",
+  "version": "1.0.0",
+  "description": "Daily FEMA Medicare SEP data sync for Bobby Brock Insurance",
+  "main": "sync-seps.mjs",
+  "type": "module",
+  "scripts": {
+    "sync": "node sync-seps.mjs",
+    "test": "echo \"Sync script ready for cloud deployment\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "keywords": ["fema", "medicare", "sep", "insurance", "automation"],
+  "author": "Bobby Brock Insurance",
+  "license": "MIT"
+} 
