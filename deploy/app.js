@@ -10,7 +10,7 @@ if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
 }
 
 // Initialize Supabase client
-const supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+const supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
 
 // Global variables
 let allSepData = [];
@@ -40,7 +40,7 @@ async function initializeApp() {
 
 // ===== DATA LOADING =====
 async function loadSepData() {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from('seps')
         .select(`
             fema_disaster_number,
