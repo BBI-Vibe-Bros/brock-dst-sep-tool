@@ -57,33 +57,53 @@ async function initializeApp() {
 }
 
 // ===== DATA LOADING =====
+// Supabase caps queries at 1000 rows by default. We paginate to get everything.
+const SUPABASE_PAGE_SIZE = 1000;
+
 async function loadSepData() {
-    const { data, error } = await supabaseClient
-        .from('seps')
-        .select(`
-            fema_disaster_number,
-            state,
-            disaster_type,
-            disaster_name,
-            counties,
-            county_count,
-            declaration_date,
-            start_date,
-            sep_end_date,
-            days_remaining,
-            sep_eligible,
-            region,
-            fema_link,
-            last_updated
-        `)
-        .eq('sep_eligible', true)
-        .order('days_remaining', { ascending: true, nullsFirst: false });
-    
-    if (error) {
-        throw new Error('Failed to fetch SEP data: ' + error.message);
+    let allRows = [];
+    let from = 0;
+    let keepFetching = true;
+
+    while (keepFetching) {
+        const { data, error } = await supabaseClient
+            .from('seps')
+            .select(`
+                fema_disaster_number,
+                state,
+                disaster_type,
+                disaster_name,
+                counties,
+                county_count,
+                declaration_date,
+                start_date,
+                sep_end_date,
+                days_remaining,
+                sep_eligible,
+                region,
+                fema_link,
+                last_updated
+            `)
+            .eq('sep_eligible', true)
+            .order('days_remaining', { ascending: true, nullsFirst: false })
+            .range(from, from + SUPABASE_PAGE_SIZE - 1);
+
+        if (error) {
+            throw new Error('Failed to fetch SEP data: ' + error.message);
+        }
+
+        const rows = data || [];
+        allRows = allRows.concat(rows);
+
+        // If we got fewer rows than the page size, we've hit the end
+        if (rows.length < SUPABASE_PAGE_SIZE) {
+            keepFetching = false;
+        } else {
+            from += SUPABASE_PAGE_SIZE;
+        }
     }
-    
-    allSepData = data || [];
+
+    allSepData = allRows;
     filteredData = [...allSepData];
 }
 

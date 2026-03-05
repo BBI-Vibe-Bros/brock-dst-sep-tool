@@ -80,7 +80,6 @@ img {
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
 }
 
 .header-content {
@@ -383,15 +382,18 @@ img {
 /* ==================== STICKY SEARCH ==================== */
 .sticky-search {
     position: fixed;
-    top: var(--header-h);
+    top: 0;
     left: 0;
     right: 0;
-    z-index: 90;
-    background: rgba(10, 10, 10, 0.95);
+    z-index: 99;
+    background: rgba(10, 10, 10, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-color);
-    padding: 10px 0;
+    padding-top: var(--header-h);
+    padding-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 0.25s ease, opacity 0.25s ease;
@@ -1088,15 +1090,26 @@ img {
     }
 
     .sticky-controls {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        gap: 7px;
     }
 
-    .sticky-controls input {
-        flex: 1 1 100%;
+    .sticky-controls input,
+    .sticky-controls select {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 8px;
+        font-size: 12px;
     }
 
     .sticky-controls select {
-        flex: 1 1 40%;
+        padding-right: 24px;
+        background-position: right 6px center;
+    }
+
+    .sticky-controls .btn-sm {
+        padding: 8px 10px;
+        flex-shrink: 0;
     }
 
     /* Results */
