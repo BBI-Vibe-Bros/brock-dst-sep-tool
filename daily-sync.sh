@@ -30,7 +30,7 @@ fi
 
 # Check if .env file exists
 if [ ! -f .env ]; then
-    log "WARNING: .env file not found. Make sure SUPABASE_URL and SUPABASE_ANON_KEY are set in environment"
+    log "WARNING: .env file not found. Make sure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set in environment"
 fi
 
 # Run the sync script and capture output

@@ -2,11 +2,12 @@
 // Insurance Agent Tool for FEMA Disaster SEP Eligibility
 
 // ===== CONFIGURATION =====
-// Your Supabase credentials
-const SUPABASE_CONFIG = {
-    url: 'https://jdwidpewtalkgdmgptxi.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impkd2lkcGV3dGFsa2dkbWdwdHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMzI0OTIsImV4cCI6MjA2NDcwODQ5Mn0.Gb0hEaj3WIJsbG0gzyBoGalxUw9VAeMkhl98USK9KaY'
-};
+// Values are injected from index.html so credentials are configured in one place.
+const SUPABASE_CONFIG = window.SUPABASE_CONFIG || {};
+
+if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
+    throw new Error('Missing SUPABASE_CONFIG. Update Supabase URL and anon key in index.html.');
+}
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);

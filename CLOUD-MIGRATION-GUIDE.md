@@ -57,9 +57,9 @@ Your Supabase credentials need to be stored securely:
    - Name: `SUPABASE_URL`
    - Value: `https://jdwidpewtalkgdmgptxi.supabase.co`
 
-   **Secret 2:**
-   - Name: `SUPABASE_ANON_KEY`  
-   - Value: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impkd2lkcGV3dGFsa2dkbWdwdHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxMzI0OTIsImV4cCI6MjA2NDcwODQ5Mn0.Gb0hEaj3WIJsbG0gzyBoGalxUw9VAeMkhl98USK9KaY`
+  **Secret 2:**
+  - Name: `SUPABASE_SERVICE_ROLE_KEY`
+  - Value: `your service_role key from Supabase Project Settings > API`
 
 ### **Step 4: Test the Automation**
 1. Go to **Actions** tab in your repository

@@ -9,18 +9,18 @@ import { createClient } from '@supabase/supabase-js';
 // ===== CONFIGURATION (Environment Variables) =====
 const SUPABASE_CONFIG = {
     url: process.env.SUPABASE_URL,
-    anonKey: process.env.SUPABASE_ANON_KEY
+    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY
 };
 
 // Validate environment variables
-if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
+if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.serviceRoleKey) {
     console.error('❌ Missing required environment variables:');
-    console.error('   SUPABASE_URL and SUPABASE_ANON_KEY must be set');
+    console.error('   SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set');
     process.exit(1);
 }
 
 // Initialize Supabase client
-const supabase = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+const supabase = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.serviceRoleKey);
 
 // FEMA API Configuration
 const FEMA_API_BASE = 'https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries';
